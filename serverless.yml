@@ -1,0 +1,46 @@
+# Welcome to Serverless!
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+
+# Tencent Cloud serverless.yml Reference
+# https://github.com/serverless-tencent/serverless-tencent-scf/blob/master/docs/en/yaml.md
+
+service: mytest
+
+provider: 
+  name: tencent
+  runtime: Python3.6 # Python3.6 or Python2.7
+  credentials: ~/credentials
+  region: na-toronto
+
+plugins:
+  - serverless-tencent-scf
+
+functions:
+  hello_world:
+    # This refers to the main_handler function
+    # in the index.py file
+    handler: index.main_handler
+
+## Below is the mechanism for enabling a timer to trigger the function every 5 minutes
+
+#    events:
+#      - timer:
+#          name: timer
+#          parameters:
+#            cronExpression: '*/5 * * * *'
+#            enable: true
+
+# A hypothetical second function would be enabled by uncommenting below
+#functions:
+#  second_hello_world:
+#    handler: index2.main_handler
+
+## Below is the mechanism for enabling a CMQ event to trigger the function 
+#    events:
+#      - cmq:
+#          name: cmq_trigger
+#          parameters:
+#            name: test-topic-queue
+#            enable: true
